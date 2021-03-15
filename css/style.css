@@ -1,0 +1,2261 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    /* scroll-behavior: smooth;  плавный скролл по странице с помощью якорей, но маленькая браузерная поддержка*/
+}
+
+@font-face {
+    font-weight: 400;
+    /*Насыщенность*/
+    font-style: normal;
+    /*Начертание шрифта: normal - обычное; italic - курсивное; oblique - наклонное начертание
+    разница между italic и oblique в том, что первое начертание это имитация рукописного шрифта, а второе наклон символов вправо*/
+    font-family: 'Montserrat';
+    /*Название шрифта*/
+    font-display: swap;
+    /*Значение block дает понять браузеру, что нужно сперва подгрузить кастомный шрифт а после 
+    отобразить его - такое явление называется FOIT, значение swap говорит браузеру заменить кастомный на резервный шрифт,
+    пока тот подгружается - это явление называется FOUT*/
+    src: url('../fonts/Montserrat/Montserrat-Regular.woff') format("woff"), url('../fonts/Montserrat/Montserrat-Regular.woff2') format("woff2");
+    /*дирректория шрифта*/
+}
+
+@font-face {
+    font-weight: 500;
+    font-style: normal;
+    font-family: 'Montserrat';
+    font-display: swap;
+    src: url('../fonts/Montserrat/Montserrat-Medium.woff') format("woff"), url('../fonts/Montserrat/Montserrat-Medium.woff2') format("woff2");
+}
+
+@font-face {
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Montserrat';
+    font-display: swap;
+    src: url('../fonts/Montserrat/Montserrat-Bold.woff') format("woff"), url('../fonts/Montserrat/Montserrat-Bold.woff2') format("woff2");
+}
+
+@font-face {
+    font-weight: 800;
+    font-style: normal;
+    font-family: 'Montserrat';
+    font-display: swap;
+    src: url('../fonts/Montserrat/Montserrat-ExtraBold.woff') format("woff"), url('../fonts/Montserrat/Montserrat-Extrabold.woff2') format("woff2");
+}
+
+:root {
+    --white: #FFFFFF;
+    --brown: #333333;
+    --cld: #FF9900;
+    --grey: #CACACA;
+    --black: #222222;
+}
+
+html, body {
+    font-family: 'Montserrat', 'sans-serif', 'Helvetica';
+    font-style: normal;
+}
+
+header {
+    background-color: var(--white);
+    box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: var(--black);
+    padding-bottom: 80px;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 59px;
+    color: var(--brown);
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+p {
+    margin: 0;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 30px;
+    color: var(--brown);
+}
+
+a {
+    text-decoration: none;
+    color: var(--brown);
+    cursor: pointer;
+}
+
+a:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+button {
+    font-family: inherit;
+    color: var(--white);
+    border: 1px solid var(--cld);
+    background-color: var(--cld);
+    cursor: pointer;
+}
+
+input {
+    font-family: inherit;
+}
+
+input:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+textarea {
+    font-family: inherit;
+}
+
+textarea:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+button:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 15px;
+    background-color: var(--white);
+}
+
+.burger {
+    display: none;
+    margin: 9px 0px 0 2px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    background: url('../img/Burger.png') no-repeat;
+    background-size: 100%;
+    transition: 0.3s background-image ease-in-out;
+}
+
+.burger:hover {
+    background: url('../img/Burger(1).png') no-repeat;
+    background-size: 100%;
+}
+
+.cross::before {
+    content: '';
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background-color: var(--black);
+    transform-origin: center center;
+    transform: rotate(45deg);
+    transition: 0.3s background-color ease-in-out;
+}
+
+.cross:hover::before {
+    background-color: var(--cld);
+}
+
+.cross {
+    position: relative;
+    display: none;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    background-color: var(--white);
+    border: 0 solid var(--white);
+    transition: 0.3s background-image ease-in-out;
+}
+
+.cross::after {
+    content: '';
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background-color: var(--black);
+    transform-origin: center center;
+    transform: rotate(-45deg);
+    transition: 0.3s background-color ease-in-out;
+}
+
+.cross:hover::after {
+    background-color: var(--cld);
+}
+
+.header-menu.is-active {
+    transform: none;
+}
+
+.logo {
+    margin: 14px auto 14px 0;
+    width: 224px;
+    height: 72px;
+    transition-property: margin-left, transform;
+    transition: 0.5s margin-left ease-in-out;
+}
+
+.logo:hover {
+    transform: rotate(-15deg);
+}
+
+.header-list {
+    display: flex;
+    margin-top: 6px;
+}
+
+.header-list-item {
+    margin-top: 5px;
+    margin-right: 88px;
+}
+
+.header-list-item:last-child {
+    margin-right: 71px;
+}
+
+.header-list-link {
+    display: inline-block;
+    position: relative;
+    height: 27px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.header-list-link::after {
+    content: '';
+    left: 50%;
+    bottom: 0;
+    position: absolute;
+    height: 2px;
+    width: 0;
+    background-color: var(--cld);
+    transition-property: left, width;
+    transition: 0.3s ease-in-out;
+}
+
+.header-list-link:hover::after {
+    left: 0;
+    width: 100%;
+}
+
+.header-search {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    background-image: url('../img/Search.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s background-image ease-in-out;
+}
+
+.header-search:hover {
+    background-image: url('../img/Search-hover.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.quicknav {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 10;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: var(--cld);
+}
+
+.quick-arrow {
+    margin-top: 6px;
+    fill: var(--cld);
+    width: 35px;
+    height: 35px;
+}
+
+.first-section {
+    position: relative;
+    margin: 0 15px;
+    margin-bottom: 100px;
+}
+
+
+.swiper-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.s1 {
+    background-image: url('../img/main-back.jpg');
+    background-size: cover;
+}
+
+.s2 {
+    background-image: url('../img/brown-and-blue-glass-building-2093076\ 1.jpg');
+    background-size: cover;
+}
+
+.s3 {
+    background-image: url('../img/apartment-apartment-building-architecture-building-323705\ 1.jpg');
+    background-size: cover;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: var(--cld);
+}
+
+.swiper-button-prev:focus, .swiper-button-next:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+.swiper-button-disabled {
+    color: #666666;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 10px;
+}
+
+.swiper-pagination-bullet {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.swiper-pagination-bullet:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+.swiper-pagination-bullet:hover {
+    border: 4px solid var(--white);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--white);
+}
+
+.first-container {
+    padding-top: 103px;
+    padding-bottom: 90px;
+    padding-left: 78px;
+}
+
+.first-title {
+    width: 850px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 70.3742px;
+    line-height: 86px;
+    color: var(--white);
+}
+
+.first-description {
+    margin-bottom: 97px;
+    width: 850px;
+    font-weight: 700;
+    font-size: 23.4581px;
+    line-height: 29px;
+    color: var(--white);
+}
+
+.first-btn {
+    padding: 24px 37.14px;
+    font-weight: 700;
+    font-size: 23.4581px;
+    line-height: 29px;
+    opacity: 100%;
+    transition: 0.3s opacity ease-in-out;
+}
+
+.first-btn:hover {
+    opacity: 60%;
+}
+
+.about-us {
+    margin: 0 15px 44px 15px;
+}
+
+.about-us-title {
+    margin-bottom: 22px;
+}
+
+.about-us-description {
+    width: 69.5%;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.i {
+    display: inline-block;
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    transform: translateY(2px);
+    background-image: url('../img/i.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.advantages {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 15px 100px 15px;
+}
+
+.advantages-left-section>* {
+    z-index: 1;
+}
+
+.advantages-left-section {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+    padding: 444px 0 0px 0px;
+    height: 624px;
+    width: 49.5%;
+    background-image: url('../img/advantage1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.advantages-left-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 176px;
+    opacity: 50%;
+    background-color: #000000;
+}
+
+.advantages-left-description {
+    margin-left: 17px;
+    width: 58%;
+    line-height: 33px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.advantages-left-link {
+    margin-right: 30px;
+    padding: 17px 36px;
+    font-weight: 700;
+    color: var(--white);
+    border: 3px solid var(--cld);
+}
+
+.advantages-left-link:hover {
+    background-color: var(--cld);
+    border: 1px solid var(--cld);
+}
+
+.advantages-right-section {
+    width: 49%;
+}
+
+.advantages-right-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.advantage-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    height: 47.5%;
+    margin-top: 4px;
+    margin-bottom: 0;
+    border: 1px solid var(--grey);
+    width: 100%;
+}
+
+.advantage-right::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 88px;
+    left: 7.5%;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: var(--cld);
+}
+
+.advantage-right::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 71px;
+    /* left: 120px; */
+    left: 14%;
+    width: 119px;
+    height: 132px;
+    background: url('../img/package.svg') no-repeat;
+    background-size: cover;
+}
+
+.advantage-right2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    height: 47.5%;
+    margin-top: 30px;
+    margin-bottom: 0;
+    border: 1px solid var(--grey);
+    width: 100%;
+}
+
+.advantage-right2::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 88px;
+    left: 7.5%;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: var(--cld);
+}
+
+.advantage-right2::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 55px;
+    left: 112px;
+    left: 13%;
+    width: 127px;
+    height: 127px;
+    background: url('../img/settings.svg') no-repeat;
+    background-size: cover;
+}
+
+.first-line {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.advantage-right-description {
+    margin-left: 34%;
+    margin-right: 5px;
+    width: 53%;
+    margin-top: 4px;
+    line-height: 33px;
+}
+
+.our-job-section {
+    margin: 0 15px 100px 15px;
+}
+
+.our-job {
+    display: flex;
+}
+
+.our-job-left {
+    position: relative;
+    width: 100%;
+}
+
+.our-job-left::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 85.5%;
+    width: 49%;
+    background: url('../img/wework.jpg') no-repeat;
+    background-size: cover;
+}
+
+.our-job-title {
+    margin: 0 0 45px 0;
+}
+
+.our-job-menu {
+    margin-bottom: 47px;
+    font-size: 18px;
+}
+
+.our-job-btn {
+    margin-right: 25px;
+    padding: 0;
+    color: var(--brown);
+    font-size: 18px;
+    background-color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.our-job-btn:hover {
+    color: var(--cld);
+}
+
+.our-job-list {
+    display: flex;
+    justify-content: space-between;
+    width: 28%;
+}
+
+.our-job-list {
+    padding-left: 0;
+}
+
+.our-job-left-title {
+    margin-bottom: 5px;
+    margin-left: 2px;
+}
+
+.our-job-left-description {
+    display: none;
+    margin-left: 3px;
+    width: 43.5%;
+    margin-bottom: 62px;
+    line-height: 32px;
+}
+.our-job-left-description--active {
+    display: block;
+}
+.more {
+    display: inline-block;
+    margin-right: 28px;
+    padding: 18px 37px;
+    font-weight: 700;
+    color: var(--white);
+    background-color: var(--cld);
+    border: 1px solid var(--cld);
+    opacity: 100%;
+}
+
+.more:hover {
+    opacity: 60%;
+}
+
+.agreement {
+    display: inline-block;
+    padding: 18px 37px;
+    color: var(--brown);
+    background-color: var(--white);
+    border: 1px solid var(--brown);
+    transition: 0.5s background-color ease-in-out;
+}
+
+.agreement:hover {
+    color: var(--white);
+    background-color: var(--brown);
+}
+
+.questions {
+    margin: 0 15px 50px 15px;
+}
+
+.questions-title {
+    margin-bottom: 39px;
+}
+
+.questions-list {
+    height: auto;
+}
+
+.questions-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-left: 3px;
+    padding: 42px 0 42px 0;
+    border-top: 1px solid var(--grey);
+    cursor: pointer;
+}
+
+.questions-item:focus {
+    outline-style: solid;
+    outline-color: var(--cld);
+    outline-width: medium;
+}
+
+.questions-item:last-of-type {
+    border-bottom: 1px solid var(--grey);
+}
+
+.questions-item::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    right: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    background: url('../img/+х.png') no-repeat;
+    background-size: cover;
+    transition: 0.3s background-image ease-in-out;
+    cursor: pointer;
+}
+
+.questions-text:hover {
+    color: var(--cld);
+}
+
+.questions-item:hover::after {
+    background: url('../img/+х-hover.png') no-repeat;
+    background-size: cover;
+}
+
+.questions-description {
+    padding: 20px 10px;
+}
+
+.map {
+    margin-bottom: 50px;
+    width: 100%; 
+    height: 500px; 
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px;
+    color: var(--white);
+}
+
+.footer-container {
+    margin-top: 1px;
+    width: 33%;
+}
+
+.footer-logo {
+    display: inline-block;
+    margin-top: 48px;
+    margin-bottom: 13px;
+    width: 225px;
+    height: 70px;
+    transition: 0.5s transform ease-in-out;
+}
+
+.footer-logo:hover {
+    transform: rotate(15deg);
+}
+
+.footer-list {
+    margin-bottom: 114px;
+}
+
+.footer-item {
+    margin-bottom: 6px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.footer-item-link {
+    color: var(--white);
+}
+
+.footer-item-link:hover {
+    color: var(--cld);
+}
+
+.footer-social-facebook {
+    display: inline-block;
+    margin-right: 21px;
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/fb.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 60%;
+}
+
+.footer-social-facebook:hover {
+    opacity: 100%;
+}
+
+.footer-social-vk {
+    display: inline-block;
+    margin-right: 21px;
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/social.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 60%;
+}
+
+.footer-social-vk:hover {
+    opacity: 100%;
+}
+
+.footer-social-inst {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/instagram.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 60%;
+}
+
+.footer-social-inst:hover {
+    opacity: 100%;
+}
+
+.correct {
+    margin-top: 4px;
+    margin-left: 8px;
+}
+
+.footer-title {
+    margin-top: 53px;
+    margin-bottom: 23px;
+    font-weight: 400;
+    color: var(--grey);
+}
+
+.footer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 410px;
+    width: 98%;
+}
+
+.footer-form-input {
+    padding-top: 5px;
+    padding-left: 27px;
+    width: 100%;
+    height: 60px;
+    color: var(--grey);
+    background-color: #414141;
+    border: none;
+}
+
+.footer-form-input::placeholder {
+    font-size: 16px;
+    color: var(--grey);
+}
+
+.footer-form-textarea {
+    margin-bottom: 6px;
+    padding: 22px 27px;
+    width: 100%;
+    height: 150px;
+    color: var(--white);
+    background-color: #414141;
+    border: none;
+}
+
+.footer-form-textarea::placeholder {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--grey);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-form-btn {
+    margin-left: 3px;
+    width: 47%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 100%;
+}
+
+.footer-form-btn:hover {
+    opacity: 60%;
+}
+
+.footer-checkbox {
+    z-index: 0;
+    position: relative;
+    margin-bottom: 3px;
+    margin-left: 15px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.footer-checkbox::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    height: 12px;
+    width: 12px;
+    top: 0;
+    left: 0;
+    border: 1px solid var(--grey);
+    background-color: var(--black);
+}
+
+.footer-checkbox:checked::after {
+    background-image: url('../img/check.png');
+    background-size: 95%;
+    background-repeat: no-repeat;
+}
+
+.footer-form-label {
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.footer-description {
+    padding: 126px 0 0 221px;
+    line-height: 33px;
+    color: var(--grey);
+}
+
+@media (max-width:1550px) {
+    .footer-description {
+        padding-top: 70px;
+        padding-left: 30%;
+    }
+}
+
+@media (max-width:1400px) {
+    .logo {
+        width: 150px;
+        height: 50px;
+    }
+    .advantage-right::before {
+        width: 80px;
+        height: 80px;
+        border: 40px;
+        top: 20px;
+        left: 0px
+    }
+    .advantage-right::after {
+        width: 80px;
+        height: 88px;
+        background-size: cover;
+        top: 0px;
+        left: 30px
+    }
+    .advantage-right2::before {
+        width: 80px;
+        height: 80px;
+        border: 40px;
+        top: 20px;
+        left: 0px
+    }
+    .advantage-right2::after {
+        width: 80px;
+        height: 80px;
+        top: 0px;
+        left: 30px
+    }
+    .advantage-right-description {
+        margin-left: 10px;
+        margin-top: 100px;
+        width: 100%;
+    }
+    .our-job-list {
+        width: 40%;
+    }
+    .footer-container:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .btn-container {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .footer-form-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:1030px) {
+    .advantages-left-link {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width:1024px) {
+    .container {
+        max-width: 954px;
+    }
+    .header-container {
+        justify-content: space-between;
+        height: 100px;
+    }
+    .burger {
+        display: inline-block;
+        cursor: pointer;
+    }
+    .cross {
+        display: inline-block;
+        cursor: pointer;
+    }
+    .logo {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 150px;
+        height: 45px;
+    }
+    .move-logo {
+        margin-left: 70%;
+        transition: 1s margin ease-in-out;
+    }
+    .header-search {
+        margin-right: 0;
+        cursor: pointer;
+    }
+    .header-menu {
+        /* display: none; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 10px;
+        width: 70%;
+        height: 100%;
+        transform: translateX(-110%);
+        background-color: var(--white);
+    }
+    .header-list {
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        width: 90%;
+        height: 100%;
+    }
+    .header-list-item {
+        margin: 0;
+    }
+    .header-list-item:last-child {
+        margin-right: 0;
+    }
+    .first-section {
+        margin-bottom: 57px;
+    }
+    .s1 {
+        background-image: url('../img/main-back1024.jpg');
+        background-position: 100% 70%;
+    }
+    .s2 {
+        background-position: 70%;
+    }
+    .s3 {
+        background-position: 25%;
+    }
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+        bottom: 25px;
+    }
+    .first-container {
+        padding: 160px 42px 115px 47px;
+    }
+    .first-title {
+        margin-bottom: 7px;
+        width: 90%;
+        font-size: 60px;
+        line-height: 75px;
+    }
+    .first-description {
+        margin-bottom: 108px;
+        width: 80%;
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .first-btn {
+        padding: 24px 38.5px;
+        font-weight: 700;
+    }
+    .first-switch {
+        display: flex;
+        margin-bottom: 3px;
+    }
+    .first-switch-btn {
+        display: inline-block;
+    }
+    .about-us {
+        margin-bottom: 58px;
+    }
+    .about-us-title {
+        margin-bottom: 27px;
+    }
+    .about-us-description {
+        width: 100%;
+        font-size: 16px;
+    }
+    .i {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+    .advantages {
+        margin-bottom: 57px;
+        flex-direction: column;
+    }
+    .advantages-left-section {
+        justify-content: space-between;
+        margin-bottom: 45px;
+        padding: 506px 0 40px 30px;
+        height: 638px;
+        width: 100%;
+        background-image: url('../img/advantage1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .advantages-left-section::after {
+        height: 175px;
+    }
+    .advantages-left-description {
+        margin-left: 15px;
+        width: 56%;
+    }
+    .advantages-left-link {
+        margin-right: 48px;
+    }
+    .advantages-right-section {
+        height: auto;
+        width: 100%;
+    }
+    .advantage-right {
+        padding: 63px 0 65px 0;
+    }
+    .advantage-right::before {
+        width: 120px;
+        height: 120px;
+        border: 60px;
+        top: 93px;
+        left: 112px;
+    }
+    .advantage-right::after {
+        width: 119px;
+        height: 132px;
+        top: 76px;
+        left: 171px;
+    }
+    .advantage-right2 {
+        margin-top: 40px;
+        padding: 60px 0 65px 0;
+        height: 45%;
+    }
+    .advantage-right2::before {
+        width: 120px;
+        height: 120px;
+        border: 60px;
+        top: 93px;
+        left: 112px;
+    }
+    .advantage-right2::after {
+        width: 127px;
+        height: 127px;
+        top: 63px;
+        left: 163px;
+    }
+    .first-line {
+        margin-bottom: 2px;
+    }
+    .advantage-right-description {
+        width: 50%;
+        margin-top: 5px;
+        margin-left: 350px;
+    }
+    .our-job-section {
+        margin-bottom: 57px;
+    }
+    .our-job {
+        display: flex;
+        justify-content: space-between;
+    }
+    .our-job-title {
+        margin-left: 0;
+        margin-bottom: 46px;
+    }
+    .our-job-left {
+        margin-bottom: 0;
+    }
+    .our-job-left::after {
+        width: 47.3%;
+        height: 89.5%;
+        background-image: url('../img/wework1024.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .our-job-menu {
+        margin-bottom: 47px;
+    }
+    .our-job-list {
+        width: 53.5%;
+    }
+    .our-job-item:last-child {
+        margin-right: 0;
+    }
+    .our-job-left-description {
+        width: 47.3%;
+        margin-bottom: 32px;
+        line-height: 32px;
+    }
+    .more {
+        margin-bottom: 0;
+    }
+    .questions {
+        margin-bottom: 55px;
+    }
+    .questions-title {
+        margin-bottom: 36px;
+    }
+    .questions-item {
+        margin-left: 0;
+        padding: 47px 0 42px 0;
+        font-size: 20px;
+        line-height: 33px;
+    }
+    .questions-item::after {
+        right: 0;
+    }
+    .questions-item:nth-of-type(2n+2) {
+        padding: 22px 0 27px;
+    }
+    .questions-item:nth-of-type(2n+3) {
+        padding: 38px 0 42px 0;
+    }
+    .length {
+        width: 81%;
+    }
+    .footer-container:nth-child(1) {
+        width: 40%;
+    }
+    .footer-container:nth-child(2) {
+        margin-right: 10px;
+        margin-left: 0;
+        width: 59%;
+    }
+    .footer-container:nth-child(3) {
+        display: none;
+    }
+    .footer-list {
+        margin-bottom: 105px;
+    }
+    .footer-title {
+        margin-left: 20px;
+    }
+    .footer-form {
+        margin-left: 20px;
+        height: 415px;
+    }
+    .footer-form-btn {
+        margin-bottom: 5px;
+        margin-left: 0;
+        width: 45%;
+    }
+    .footer-checkbox {
+        margin-right: 5px;
+        margin-left: 10px;
+    }
+    .footer-form-label {
+        margin-right: 0;
+    }
+}
+
+@media (max-width:933px) {
+    .footer-form-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width:893px) {
+    .s1 {
+        padding-top: 100px;
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        max-width: 768px;
+    }
+    .container768 {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .header-menu {
+        width: 65%;
+    }
+    .header-list {
+        margin-top: 10px;
+    }
+    .header-container {
+        height: 85px;
+        padding: 12px 15px 0 15px;
+    }
+    .burger {
+        margin-left: 0;
+        display: inline-block;
+    }
+    .move-logo {
+        margin-left: 65%;
+    }
+    .logo {
+        width: 150px;
+        height: 45px;
+    }
+    .header-search {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 3px;
+        margin-right: 0;
+    }
+    .s1 {
+        background-position: 100% 100%;
+    }
+    .swiper-button-prev, .swiper-button-next {
+        display: none;
+    }
+    .first-section {
+        margin: 0 0;
+        margin-bottom: 56px;
+        padding-bottom: 0;
+    }
+    .first-container {
+        padding: 190px 0 112px 47px;
+    }
+    .first-title {
+        margin-right: 0;
+        margin-bottom: 12px;
+        width: 100%;
+        font-size: 60px;
+        line-height: 73px;
+    }
+    .first-description {
+        margin-bottom: 110px;
+        width: 100%;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .first-btn {
+        padding: 25px 38px;
+    }
+    .first-switch {
+        margin-left: 41%;
+    }
+    .about-us {
+        padding: 0 15px;
+        margin-bottom: 59px;
+    }
+    .about-us-title {
+        margin-bottom: 27px;
+    }
+    .about-us-description {
+        margin-left: 3px;
+        width: 100%;
+        line-height: 32.5px;
+    }
+    .advantages {
+        padding: 0 15px;
+        margin-bottom: 55px;
+        flex-direction: column;
+    }
+    .advantages-left-section {
+        margin-left: 3px;
+        margin-bottom: 38px;
+        padding: 500px 0 27px 0px;
+        height: auto;
+        width: 100%;
+        background-image: url('../img/advantage1.jpg');
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+    }
+    .advantages-left-section::after {
+        height: 170px;
+    }
+    .advantages-left-description {
+        margin-left: 25px;
+        line-height: 30px;
+        width: 60%;
+    }
+    .advantages-left-link {
+        margin-right: 30px;
+        margin-left: 0;
+    }
+    .advantages-right-section {
+        height: auto;
+        width: 100%;
+    }
+    .advantage-right {
+        margin-top: 0;
+        padding: 38px 20px 35px 178px;
+        height: auto;
+    }
+    .advantage-right::before {
+        width: 80px;
+        height: 80px;
+        top: 85px;
+        left: 33px;
+        border: 40px;
+    }
+    .advantage-right::after {
+        width: 80px;
+        height: 88px;
+        top: 74px;
+        left: 72px;
+    }
+    .advantage-right2 {
+        padding: 30px 20px 35px 176px;
+        margin-top: 40px;
+        height: auto;
+    }
+    .advantage-right2::before {
+        width: 76px;
+        height: 76px;
+        top: 85px;
+        left: 33px;
+        border: 38px;
+    }
+    .advantage-right2::after {
+        width: 80px;
+        height: 80px;
+        top: 68px;
+        left: 68px;
+    }
+    .advantage-right-description {
+        margin-left: 0;
+        width: 100%;
+    }
+    .our-job-section {
+        padding: 0 15px;
+    }
+    .our-job {
+        flex-direction: column;
+        margin-bottom: 57px;
+    }
+    .our-job-left {
+        width: 100%;
+        padding-right: 0;
+        background: none;
+    }
+    .our-job-left::after {
+        display: none;
+    }
+    .our-job-title {
+        margin-bottom: 48px;
+    }
+    .our-job-menu {
+        margin-bottom: 40px;
+        padding-bottom: 328px;
+        background: url('../img/wework768.jpg') 0 100% no-repeat;
+        background-size: 100% 80%;
+    }
+    .our-job-list {
+        width: 100%;
+    }
+    .our-job-btn {
+        margin-right: 0;
+        margin-left: 2px;
+    }
+    .our-job-left-title {
+        margin-left: 3px;
+        margin-bottom: 5px;
+    }
+    .our-job-left-description {
+        width: 100%;
+        margin-left: 3px;
+        margin-bottom: 30px;
+        line-height: 32px;
+    }
+    .more {
+        display: inline-block;
+        margin-right: 28px;
+        margin-left: 3px;
+        padding: 18px 37px;
+    }
+    .agreement {
+        display: inline-block;
+        padding: 18px 37px;
+    }
+    .our-job-right {
+        display: none;
+    }
+    .questions {
+        padding: 0 15px;
+        margin-bottom: 63px;
+    }
+    .questions-title {
+        margin-bottom: 36px;
+        margin-left: 3px;
+        font-size: 46px;
+    }
+    .questions-text {
+        font-size: 20px;
+        line-height: 33px;
+    }
+    .questions-item:first-of-type {
+        padding-top: 32px;
+        padding-bottom: 26px;
+    }
+    .questions-item:not(:first-of-type) {
+        padding-top: 23px;
+        padding-bottom: 23px;
+    }
+    .questions-item:nth-of-type(3) .length {
+        width: 70%;
+    }
+    .questions-item:nth-of-type(4) .length {
+        width: 80%;
+    }
+    .footer {
+        display: block;
+        position: relative;
+        margin: 0 15px;
+        height: 775px;
+    }
+    .footer-list {
+        display: none;
+    }
+    .footer-container:nth-child(1) {
+        position: absolute;
+        bottom: 15px;
+        width: 50%;
+    }
+    .footer-container:nth-child(2) {
+        position: absolute;
+        margin-left: 0;
+        top: 0px;
+        width: 100%;
+    }
+    .footer-container:nth-child(3) {
+        display: none;
+    }
+    .footer-title {
+        margin-left: 0;
+    }
+    .footer-form {
+        margin-left: 0;
+        width: 80%;
+    }
+    .footer-form-textarea {
+        margin-bottom: 4px;
+    }
+    .footer-form-btn {
+        width: 45%;
+    }
+    .footer-checkbox {
+        margin-left: 15px;
+        margin-right: 4px;
+    }
+    .footer-form-label {
+        margin-right: 0;
+        color: var(--white);
+    }
+    .footer-logo {
+        margin-top: 55px;
+    }
+}
+
+@media (max-width:767px) {
+    .s1 {
+        padding-top: 100px;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+
+@media (max-width:710px) {
+    .move-logo {
+        margin-left: 0;
+    }
+    .header-menu.is-active {
+        transform: none;
+    }
+    .header-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 30vw;
+        height: 100vh;
+        color: var(--white);
+        background-color: var(--brown);
+        opacity: .9;
+        transform: translateX(-109%);
+    }
+    .cross::before {
+        background-color: var(--white);
+        top: 4px;
+        transform: rotate(-45deg);
+    }
+    .cross {
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 10%;
+        background-color: var(--brown);
+    }
+    .cross::after {
+        background-color: var(--white);
+        bottom: 4px;
+        transform: rotate(45deg);
+    }
+    .header-list {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        width: auto;
+        height: 90%;
+        flex-direction: column;
+    }
+    .header-list-link {
+        color: var(--white);
+    }
+}
+
+@media (max-width:691px) {
+    .s1 {
+        width: 50%;
+    }
+    .footer-form-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width:619px) {
+    .about-us {
+        margin-bottom: 10px;
+    }
+    .about-us-description {
+        width: 100%;
+        font-size: 14px;
+        line-height: 28px;
+        padding-bottom: 370px;
+        background: url('../img/advantage1-1024.jpg') 0 100% no-repeat;
+        background-size: 100% 360px;
+    }
+    .advantages-left-section {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 10px;
+        padding-top: 0;
+        background: none;
+    }
+    .advantages-left-section::after {
+        display: none;
+    }
+    .advantages-left-description {
+        margin-left: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        font-weight: 400;
+        color: var(--black);
+    }
+    .advantages-left-link {
+        color: var(--cld);
+    }
+    .footer-container {
+        width: 100%;
+    }
+    .footer-container:nth-child(1) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        bottom: 10px;
+    }
+    .footer-logo {
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    .footer-social-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        width: 58%;
+    }
+    .footer-container:nth-child(2) {
+        margin-right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-title {
+        font-size: 35px;
+    }
+}
+
+@media (max-width:584px) {
+    .first-container {
+        padding: 50px 0 100px;
+    }
+    .first-title {
+        text-align: center;
+        font-size: 40px;
+        line-height: 50px;
+        margin-bottom: 30px;
+    }
+    .first-description {
+        margin-bottom: 70px;
+        text-align: center;
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .first-btn {
+        margin-left: 32%;
+        padding: 20px 20px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width:513px) {
+    h2 {
+        font-size: 35px;
+        line-height: 40px;
+    }
+    .s1 {
+        padding: 50px 5px;
+    }
+    .first-btn {
+        margin-left: 29%;
+    }
+    .questions-title {
+        font-size: 35px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width:499px) {
+    .header-menu {
+        width: 50vw;
+    }
+}
+
+@media (max-width:464px) {
+    .first-title {
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+    .first-description {
+        margin-bottom: 50px;
+        font-size: 16px;
+        padding: 0 20px;
+    }
+    .first-btn {
+        margin-left: 28%;
+    }
+}
+
+@media (max-width:414px) {
+    .container {
+        max-width: 414px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 14px;
+    }
+    .header-container {
+        position: relative;
+        margin: 0 0;
+        height: 60px;
+    }
+    .header-search {
+        display: none;
+    }
+    .logo {
+        position: absolute;
+        margin: 0;
+        width: 110px;
+        height: 40px;
+        top: 10px;
+        left: 15px;
+        background-size: 115px 50px;
+    }
+    .burger {
+        position: absolute;
+        margin: 0;
+        top: 20px;
+        right: 15px;
+        width: 30px;
+        height: 27px;
+        background-size: 30px 24px;
+    }
+    .first-section {
+        margin: 0 15px 20px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+    }
+
+    .first-container {
+        padding-bottom: 50px;
+    }
+    .first-title {
+        margin: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: 800;
+        font-size: 26px;
+    }
+    .first-description {
+        margin: 0;
+        margin-bottom: 50px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 500;
+    }
+    .first-btn {
+        margin-bottom: 10px;
+        padding: 30px 40px 30px 40px;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 0;
+    }
+    .first-switch {
+        display: none;
+    }
+    .about-us {
+        margin-bottom: 20px;
+    }
+    .about-us-title {
+        margin-bottom: 0;
+        line-height: 31px;
+    }
+    .about-us-description {
+        padding-bottom: 270px;
+        background: url('../img-mobile/advantage320.png') 0 100% no-repeat;
+        background-size: 100% 260px;
+    }
+    .i {
+        margin-left: 0;
+    }
+    .advantages {
+        margin-bottom: 20px;
+    }
+    .advantages-left-section {
+        padding-top: 0;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .advantages-left-description {
+        margin-left: 0;
+        margin-bottom: 7px;
+        width: 90%;
+        line-height: 28px;
+        font-weight: 400;
+    }
+    .advantages-left-link {
+        margin-left: 0;
+        padding: 20px 42px;
+        font-size: 12px;
+        font-weight: 700;
+        border: 2px solid var(--cld);
+    }
+    .advantage-right {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 50px 0 20px;
+        align-items: flex-start;
+        border: none;
+    }
+    .advantage-right::before {
+        width: 44px;
+        height: 44px;
+        top: 6px;
+        left: 0;
+        border: 22px;
+    }
+    .advantage-right::after {
+        width: 44px;
+        height: 48px;
+        top: 0;
+        left: 21px;
+    }
+    .advantage-right2 {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 50px 0 20px;
+        align-items: flex-start;
+        border: none;
+    }
+    .advantage-right2::before {
+        width: 44px;
+        height: 44px;
+        top: 12px;
+        left: 0;
+        border: 22px;
+    }
+    .advantage-right2::after {
+        width: 45px;
+        height: 45px;
+        top: 0;
+        left: 18px;
+    }
+    .first-line {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    .advantage-right-description {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 0;
+        width: 100%;
+        line-height: 28px;
+    }
+    .our-job {
+        margin-bottom: 20px;
+    }
+    .our-job-menu {
+        margin-bottom: 10px;
+        padding-bottom: 220px;
+        height: auto;
+        background: url('../img-mobile/wework.png') 0 100% no-repeat;
+        background-size: 100%;
+    }
+    .our-job-title {
+        margin-bottom: 13px;
+    }
+    .our-job-btn {
+        font-size: 14px;
+    }
+    .our-job-left-title {
+        margin-bottom: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .our-job-left-description {
+        margin-bottom: 18px;
+        width: 100%;
+        line-height: 28px;
+    }
+    .more {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 22px 42px;
+        font-size: 12px;
+    }
+    .agreement {
+        margin-left: 15px;
+        padding: 21px 32px;
+        font-size: 12px;
+    }
+    .questions {
+        margin-bottom: 40px;
+    }
+    .questions-title {
+        margin-bottom: 16px;
+        font-size: 24px;
+        line-height: 26px;
+    }
+    .questions-list p {
+        font-size: 10px;
+    }
+    .questions-item::after {
+        width: 30px;
+        height: 30px;
+    }
+    .questions-item:first-of-type {
+        padding: 20px 0 23px 0;
+    }
+    .questions-item:nth-of-type(2n+2) {
+        margin-top: 2px;
+    }
+    .questions-item:only-of-type(2n+3) {
+        padding-bottom: 21px;
+    }
+    .questions .length {
+        width: 78%;
+    }
+    .questions-item:nth-of-type(3) .length {
+        width: 80%;
+    }
+    .questions-item:nth-of-type(4) .length {
+        width: 90%;
+    }
+    .questions-text {
+        font-size: 14px;
+        line-height: 23px;
+        font-weight: 500;
+    }
+    .footer {
+        height: 720px;
+    }
+    .footer-title {
+        margin-left: 0;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    .footer-form {
+        height: auto;
+        margin-left: 0;
+        width: 100%;
+    }
+    .footer-form-input {
+        padding-left: 20px;
+        margin-bottom: 25px;
+    }
+    .footer-form-input::placeholder {
+        font-size: 14px;
+    }
+    .footer-form-textarea {
+        padding-left: 20px;
+        margin-bottom: 25px;
+    }
+    .footer-form-textarea::placeholder {
+        font-size: 14px;
+    }
+    .btn-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #595959;
+    }
+    .footer-form-btn {
+        margin-right: 60px;
+        margin-left: 70px;
+        margin-bottom: 20px;
+        padding: 32px 0;
+        width: 63%;
+        font-size: 12px;
+    }
+    .footer-checkbox {
+        margin-left: 0;
+    }
+    .footer-container:nth-child(1) {
+        left: 30%;
+        width: 141px;
+    }
+    .footer-logo {
+        width: 131px;
+        height: 42px;
+    }
+    .footer-social-container {
+        width: auto;
+    }
+    .footer-social-facebook {
+        margin-right: 10px;
+        width: 34.4px;
+        height: 34.4px;
+    }
+    .footer-social-vk {
+        margin-right: 10px;
+        width: 34.4px;
+        height: 34.4px;
+    }
+    .footer-social-inst {
+        width: 34.4px;
+        height: 34.4px;
+    }
+}
+
+@media (max-width:320px) {
+    .container {
+        max-width: 290px;
+    }
+    .header-container {
+        margin: 0 0;
+        padding-top: 10px;
+        height: 45px;
+    }
+    .logo {
+        left: 0;
+        top: 8px;
+        width: 97px;
+        height: 31px;
+        background-size: 97px 31px;
+    }
+    .burger {
+        right: 0;
+        top: 28%;
+        background-size: 25px 19px;
+    }
+    .first-section {
+        margin: 0;
+        padding: 0 0;
+        margin-bottom: 38px;
+    }
+    .first-container {
+        padding: 30px 0 28px;
+    }
+    .s1 {
+        background-image: url('../img-mobile/main-back-320.jpg')
+    }
+    .swiper-pagination {
+        display: none;
+    }
+    .first-title {
+        margin-bottom: 7px;
+        line-height: 25px;
+        font-size: 20px;
+    }
+    .first-description {
+        margin-bottom: 35px;
+        line-height: 15px;
+        font-size: 12px;
+    }
+    .first-btn {
+        margin-left: 22%;
+        padding: 20px 30px 20px 30px;
+    }
+    .about-us {
+        margin-bottom: 10px;
+        padding: 0 0;
+    }
+    .about-us-description {
+        margin-left: 0;
+        padding-bottom: 210px;
+        background: url('../img-mobile/advantage320.png') 0 100% no-repeat;
+    }
+    .advantages {
+        padding: 0;
+        margin-bottom: 40px;
+    }
+    .advantages-left-section {
+        margin-left: 0;
+        margin-bottom: 35px;
+    }
+    .advantages-left-description {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .advantages-left-link {
+        padding: 10px 42px;
+        border: 2px solid var(--cld);
+    }
+    .advantage-right {
+        padding: 0;
+    }
+    .advantage-right2 {
+        padding: 0;
+        padding-top: 5px;
+        margin-top: 20px;
+    }
+    .first-line {
+        margin-bottom: 0;
+        line-height: 24px;
+    }
+    .advantage-right-description {
+        margin-top: 50px;
+        padding: 0;
+    }
+    .our-job-section {
+        padding: 0;
+    }
+    .our-job {
+        margin-bottom: 38px;
+    }
+    .our-job-menu {
+        padding-bottom: 175px;
+        background: url('../img-mobile/wework.png') 0 100% no-repeat;
+    }
+    .our-job-title {
+        margin-bottom: 29px;
+    }
+    .more {
+        padding: 12px 42px;
+    }
+    .agreement {
+        margin-left: 5px;
+        padding: 11px 32px;
+    }
+    .questions {
+        padding: 0;
+    }
+    .questions-title {
+        margin-left: 0;
+        margin-bottom: 16px;
+    }
+    .questions-item:nth-of-type(2) .length {
+        width: 70%;
+    }
+    .questions-item:nth-of-type(3) .length {
+        width: 80%;
+    }
+    .footer {
+        margin: 0;
+        height: 678px;
+    }
+    .footer-container:nth-child(2) {
+        align-items: flex-start;
+    }
+    .footer-title {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+    .footer-form-btn {
+        margin-right: 50px;
+        margin-left: 50px;
+        padding: 12px 0;
+    }
+    .footer-container:nth-child(1) {
+        left: 25%;
+        bottom: 15px;
+    }
+}
